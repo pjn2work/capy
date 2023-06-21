@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CApy</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        table, td, th {
+            border: 1px solid #ddd;
+            text-align: right;
+            vertical-align: text-top;
+            height: 100%;
+            padding: 12px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table.grid, tr.grid, td.grid {
+            border: 0px solid #fed;
+        }
+        th {
+            text-align: center;
+            background-color: #fcad70;
+            color: rgb(64, 64, 80);
+        }
+        th.csr { background-color: #ffd0a0; }
+        th.s2p { background-color: #fcbda0; }
+        td.submit {
+            text-align: center;
+            background-color: #fffaf5;
+        }
+    </style>
+</head>
+<body>
+
+
+<table class="grid" width="1600px">
+    <tr class="grid">
+
+
+        <td class="grid">
+            <form method="get" action="/ca/gen-csr" target="_blank">
+                <table>
+                    <th class="csr">Generate CSR</th>
+                    <tr>  <td><label for="CN">CN</label><input type="text" size="8" name="CN" id="CN"></td>  </tr>
+                    <tr>  <td><label for="O"> O </label><input type="text" size="8" name="O" id="O"></td>  </tr>
+                    <tr>  <td><label for="OU">OU</label><input type="text" size="8" name="OU" id="OU"></td>  </tr>
+                    <tr>  <td><label for="C"> C </label><input type="text" size="8" name="C" id="C"></td>  </tr>
+                    <tr>  <td><label for="ST">ST</label><input type="text" size="8" name="ST" id="ST"></td>  </tr>
+                    <tr>  <td><label for="L"> L </label><input type="text" size="8" name="L" id="L"></td>  </tr>
+                    <tr>  <td class="submit"><input type="submit" value="Generate"></td>  </tr>
+                </table>
+            </form>
+        </td>
+
+        <td bgcolor="#fffaf5" class="grid"></td>
+
+        <td class="grid">
+            <form method="get" action="/ca/gen-cert-root" target="_blank">
+            <table>
+                <th>Generate Root Certificate</th>
+                <tr>  <td><label for="CN">CN</label><input type="text" size="8" name="CN" id="CN"></td>  </tr>
+                <tr>  <td><label for="O"> O </label><input type="text" size="8" name="O" id="O"></td>  </tr>
+                <tr>  <td><label for="OU">OU</label><input type="text" size="8" name="OU" id="OU"></td>  </tr>
+                <tr>  <td><label for="C"> C </label><input type="text" size="8" name="C" id="C"></td>  </tr>
+                <tr>  <td><label for="ST">ST</label><input type="text" size="8" name="ST" id="ST"></td>  </tr>
+                <tr>  <td><label for="L"> L </label><input type="text" size="8" name="L" id="L"></td>  </tr>
+                <tr>  <td><label for="days">days</label><input type="text" size="4" name="days" id="days" value="365"></td>  </tr>
+                <tr>  <td><label for="path_length">path_length</label><input type="text" size="4" name="path_length" id="path_length" value="0"></td>  </tr>
+                <tr>  <td class="submit"><input type="submit" value="Generate"></td>  </tr>
+            </table>
+            </form>
+        </td>
+
+        <td class="grid">
+            <form method="post" action="/ca/gen-cert-interm" target="_blank">
+                <table>
+                    <th>Generate Intermediate Certificate</th>
+                    <tr>  <td><label for="CN">CN</label><input type="text" size="8" name="CN" id="CN"></td>  </tr>
+                    <tr>  <td><label for="O"> O </label><input type="text" size="8" name="O" id="O"></td>  </tr>
+                    <tr>  <td><label for="OU">OU</label><input type="text" size="8" name="OU" id="OU"></td>  </tr>
+                    <tr>  <td><label for="C"> C </label><input type="text" size="8" name="C" id="C"></td>  </tr>
+                    <tr>  <td><label for="ST">ST</label><input type="text" size="8" name="ST" id="ST"></td>  </tr>
+                    <tr>  <td><label for="L"> L </label><input type="text" size="8" name="L" id="L"></td>  </tr>
+                    <tr>  <td><label for="days">days</label><input type="text" size="4" name="days" value="365"></td>  </tr>
+                    <tr>  <td><label for="path_length">path_length</label><input type="text" size="4" name="path_length" value="0"></td>  </tr>
+                    <tr>  <td><label for="issuer_private_key">issuer_private_key</label><br><textarea rows="4" cols="65" name="issuer_private_key" id="issuer_private_key"></textarea></td>  </tr>
+                    <tr>  <td><label for="issuer_cert">issuer_cert</label><br><textarea rows="4" cols="65" name="issuer_cert" id="issuer_cert"></textarea></td>  </tr>
+                    <tr>  <td class="submit"><input type="submit" value="Generate"></td>  </tr>
+                </table>
+            </form>
+        </td>
+
+
+        <td class="grid">
+            <form method="post" action="/ca/gen-cert-end" target="_blank">
+                <table>
+                    <th>Generate EndEntity Certificate</th>
+                    <tr>  <td><label for="days">days</label><input type="text" size="4" name="days" value="365"></td>  </tr>
+                    <tr>  <td><label for="issuer_private_key">issuer_private_key</label><br><textarea rows="4" cols="65" name="issuer_private_key"></textarea></td>  </tr>
+                    <tr>  <td><label for="issuer_cert">issuer_cert</label><br><textarea rows="8" cols="65" name="issuer_cert"></textarea></td>  </tr>
+                    <tr>  <td><label for="csr_data">csr_data</label><br><textarea rows="8" cols="65" name="csr_data" id="csr_data"></textarea></td>  </tr>
+                    <tr>  <td class="submit"><input type="submit" value="Generate"></td>  </tr>
+                </table>
+            </form>
+        </td>
+
+    </tr><tr>
+
+        <td colspan="5" class="grid">
+            <form method="post" action="/ca/str2pem" target="_blank">
+            <table width="100%">
+                <th class="s2p">Convert string to PEM</th>
+                <tr>  <td><textarea cols="190" rows="6" name="data_str"></textarea></td>  </tr>
+                <tr>  <td class="submit"><input type="submit" value="Convert"></td>  </tr>
+            </table>
+            </form>
+        </td>
+
+
+    </tr>
+</table>
+
+</body>
+</html>
