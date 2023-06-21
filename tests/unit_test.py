@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from src.pyca import app
+from src.capy import app
 from src.lib_ca import get_subject_dict_from_cert_str, get_subject_dict_from_csr_str, \
     decode_cert, generate_ssh_keypair, convert_keypair_to_pem_format, convert_subject_to_dict
 
